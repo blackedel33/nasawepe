@@ -14,11 +14,19 @@ get_header();?>
 					<header class="page-header">
 						<div class="entry-meta">
 							<!-- <p>DATE: </p>   </div>.entry-meta -->
-							<h1 class="entry-title"></h1>  </header><!-- .entry-header -->
+							<h1 class="entry-title"><center>Fiksi</center></h1>  </header><!-- .entry-header -->
 
 							<div class="entry-content">
 
 								<?php 
+
+								$args = array(
+									'category' => array(9,10,11),
+									'post_type' => 'book',
+									'posts_per_page' => 4,
+									'paged' => $paged
+								);
+								$wp_query = new WP_Query($args);
 
 								if( have_posts() ):
 								//endif;
@@ -31,14 +39,14 @@ get_header();?>
 
 									<?php endwhile; ?>
 
-								
-								<?
+									
+									<?
 								else:
 
 									_e( '<center>Maaf ga ada !.</center>', 'nasa2' ); 
-                				
+									
 
-                				endif;
+								endif;
 
 								?>
 

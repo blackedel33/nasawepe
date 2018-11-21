@@ -142,7 +142,7 @@ get_header();?>
 
 
             <div class="entry">
-              
+
               <div class="container">
 
                 <?php query_posts( array( 'post_type' => 'book', 'paged' => $paged ) ); ?>
@@ -160,7 +160,7 @@ get_header();?>
                   <?php if ( $i == 0 ) echo '<div class="row">'; ?>
 
                   <div class="col-sm-6" style="margin-bottom: 65px;">
-                    
+
                     <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 
 
@@ -186,6 +186,7 @@ get_header();?>
     $publisher = get_post_meta($post->ID, "book_publisher_name", true); 
     $test = get_post_meta($post->ID, "rating_book", true); 
     $userwp = get_post_meta($post->ID, "user-wp", true); 
+
 
 
     echo "<table border='2'>";
