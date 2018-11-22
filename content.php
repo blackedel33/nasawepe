@@ -10,7 +10,13 @@
       <?php the_post_thumbnail('medium'); ?>
 
 
-      <?php the_content(); ?>
+      <?php 
+    
+      the_content(); 
+      
+
+
+      ?>
 
 
       <?php else: ?>
@@ -23,6 +29,8 @@
 
 
       <?php endif; ?>
+
+      <?php wp_reset_query(); ?>
 
     </div><!-- col -->
 

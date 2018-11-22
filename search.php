@@ -14,28 +14,50 @@ get_header();?>
 					<header class="page-header">
 						<div class="entry-meta">
 							<!-- <p>DATE: </p>   </div>.entry-meta -->
-							<h1 class="entry-title"><center>Fiksi</center></h1>  </header><!-- .entry-header -->
+							<h1 class="entry-title"><center>Fiksi</center></h1>  </header>
+							<!-- .entry-header -->
 
 							<div class="entry-content">
 
 								<?php 
 
 								$args = array(
-									'category' => array(9,10,11),
+									'category' => 9,
 									'post_type' => 'book',
 									'posts_per_page' => 4,
 									'paged' => $paged
 								);
 								$wp_query = new WP_Query($args);
 
+
+
 								if( have_posts() ):
 								//endif;
 
-									while( have_posts() ): the_post(); ?>
+									while( have_posts() ): the_post(); $do_not_duplicate = $post->ID; $excerpt=get_the_excerpt(); ?>
 
 										<?php 
 
-										get_template_part('content'); ?>
+										$publisher = get_post_meta($post->ID, "book_publisher_name", true); 
+										$test = get_post_meta($post->ID, "rating_book", true); 
+										$userwp = get_post_meta($post->ID, "user-wp", true); 
+
+
+										get_template_part('content'); 
+
+										echo "<table border='2'>";
+										echo "<tr><td></td><td></td></tr>";
+
+										echo "<tr><td>Publisher</td><td>{$publisher}</td><tr>";
+
+										echo "<tr><td>Rating</td><td>{$test}</td><tr>";
+
+										echo "<tr><td>Author</td><td>{$userwp}</td><tr>";
+
+										echo "</table>";
+
+
+										?>
 
 									<?php endwhile; ?>
 

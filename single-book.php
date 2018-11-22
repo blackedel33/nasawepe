@@ -16,7 +16,7 @@ if (have_posts()) {
         <div id="content" class="site-content container">
           <ol class="breadcrumb" id="nasa_jsc_breadcrumbs"><li><a href="https://jscsos.com">Home</a> </li> <li><a href="https://jscsos.com/category/latest-news/">Latest News</a></li><li class="active">Cool Weather on the Way</li></ol>    <div class="row">
             <div class="col-md-8 jsc-status">
-              <h2>November 14, 2018 - <div id="recentUpdatesBar"><p>JSC is Open</p></div></h2>
+              <h2>November 14, 2018 - <div id="recentUpdatesBar"><p>JSC is <?php echo get_theme_mod('text_farid'); ?></p></div></h2>
             </div>
             <div class="col-md-4 search-wrap">
               <form class="form-horizontal" role="form" method="get" action="https://jscsos.com/">
@@ -60,6 +60,8 @@ if (have_posts()) {
 
               </article></main><!-- #main -->
             </div><!-- #primary -->
+
+         
 
             <?php
             get_footer();?>

@@ -46,11 +46,11 @@ function theme_wp_scripts()
       wp_enqueue_script('comment-reply');
     }
 
-    wp_enqueue_style('hmm-style', get_template_directory_uri() . '/style.css');
+    wp_enqueue_style('nasa_jsc-style-css', get_template_directory_uri() . '/style.css');
     
     
     // style.css
-    //wp_enqueue_style('customize-style', get_stylesheet_uri());
+    wp_enqueue_style('customize-style', get_stylesheet_uri());
     
     /**
      * JAVASCRPIPT
@@ -220,10 +220,10 @@ function wp_nasa2_pages_function(){
 	    // Create and display the dropdown menu.
     wp_dropdown_categories(
      array(
-      
+
 	    'taxonomy'        => 'Genre', // Only include posts with the taxonomy of 'tools'.
 	    'name'            => 'Genre', // Change this to the
-      
+
    ) );
    ?>
 
@@ -240,7 +240,7 @@ add_action("save_post", "wp_nasa2_save_metabox_data",10,2);
      // fungsi simpan metabox
 
 function wp_nasa2_save_metabox_data($post_id, $post){
-  
+
   $post_slug = "book";
   if ($post_slug != $post->post_type){
     return;
@@ -279,7 +279,7 @@ add_action( 'init', 'crunchify_create_deals_custom_taxonomy',0);
 
 
 function crunchify_create_deals_custom_taxonomy() {
- 
+
   $labels = array(
     'name' => _x( 'Genre', 'taxonomy general name' ),
     'singular_name' => _x( 'Genre', 'taxonomy singular name' ),
@@ -341,4 +341,15 @@ function SearchFilter($query) {
   add_filter('pre_get_posts','SearchFilter');
 
 
+  function nasa2_admin_notices() {
+    echo '<div class="error"><p>Selamat datang Happy Coding coy !</p></div>';
+  }
+  add_action('admin_notices', 'nasa2_admin_notices');
+
+
+
+  // masukin 
+  include( get_template_directory() . '/inc/theme-customizer.php');
+  // aktifkan
+  add_action('customize_register', 'nasa2_customize_register');
 
