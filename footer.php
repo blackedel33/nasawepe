@@ -41,6 +41,8 @@
        x[slideIndex-1].style.display = "block";  
      }
    </script>
+
+   
    
    <?php wp_footer(); ?>
  </body>

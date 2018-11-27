@@ -7,6 +7,54 @@
     
     <style type="text/css">
 
+    /* Sets width of entire accordion */
+.topbaricons {
+  max-width: 75%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Sets width individual icon sections and floats them left */
+.topicon {
+  float: left;
+  width: 33%;
+}
+
+/* Color of links inside the accordion */
+.topicon a {
+  color: #fff;
+}
+
+/* Entire style of the outer accordion */
+.accordion {
+    background-color: #E3F7FA;
+    cursor: pointer;
+    color: #000;
+    font-family: Arial Rounded MT Bold;
+    padding: 18px;
+    border: 2px dashed #ccc;
+    width: 100%;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    transition: 0.4s;
+}
+
+/* Keeps the accordion's color when in action */
+button.accordion:hover {
+    background-color: #E3F7FA;
+}
+
+/* Last but not least, sets the panel up which drops down */
+.panel {
+    padding: 0 18px;
+    background-color: #791420;
+    font-family: Arial Rounded MT Bold;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
     /* caption coy */
 
     .wp-caption {
@@ -83,6 +131,32 @@
         font-size: 30px;
         padding: 5px;
     }
+
+    #jrlw-accordian .accordion-toggle{
+    cursor: pointer; 
+    padding: 10px;
+    border-radius: 10px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+#jrlw-accordian .accordion-toggle:not(.jrlw-active){
+  width: 85%;
+}
+
+#jrlw-accordian .fa-info-circle {
+    float: right;
+    margin-top: 3px;
+    display: inline;
+}
+
+#jrlw-accordian .accordion-content {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #efefef;
+    overflow: hidden;
+    display: none;
+}
 
 
 
