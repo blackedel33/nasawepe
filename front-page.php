@@ -3,7 +3,7 @@ get_header();?>
 <div id="content" class="site-content container">
   <div class="row">
     <div class="col-md-8 jsc-status">
-      <h2>November 7, 2018 - <div id="recentUpdatesBar"><p>JSC is Open</p></div></h2>
+      <h2>November 7, 2018 - <div id="recentUpdatesCoy"><p>JSC is <?php echo get_theme_mod('text_farid'); ?> </p></div></h2>
     </div>
     <div class="col-md-4 search-wrap">
 
@@ -102,9 +102,9 @@ By accessing and/or using this code snippet, you agree to AccuWeather’s terms 
   
   
   
-      <div class="container latest-news">
-              <h3>Latest News</h3>
-                      <?php
+  <div class="container latest-news">
+    <h3>Latest News</h3>
+    <?php
                             /**
                             * Check Apakah Ada Postingan
                             */
@@ -114,8 +114,8 @@ By accessing and/or using this code snippet, you agree to AccuWeather’s terms 
                            */
                           while (have_posts()) {
                             the_post(); ?>
-      </div>
-      <div class="container latest-news">
+                          </div>
+                          <div class="container latest-news">
 
                             <small class="doc-date clearfix"><?php the_date();?></small>
                             <h4><?php the_title();?></h4>
@@ -133,52 +133,52 @@ By accessing and/or using this code snippet, you agree to AccuWeather’s terms 
 
                         } else {
                 // not found article ?>
-      <div class="post-preview">
+                <div class="post-preview">
                   <h2 class="post-title">Article Not Found!!!</h2>
-      </div>
+                </div>
                 <hr>
                 <?php
               }
               ?>   
               
               <a href=""><button type="button" class="btn btn-primary">Read All Latest News »</button></a>
-      </div>
-      </div>
-      <!-- End Column 2 -->
-      
-      <!-- Column 3 -->
-      <div class="col-md-4 col-sm-4">
-
-        <aside id="secondary" class="widget-area" role="complementary">
-
-          <?php do_action( 'before_sidebar' ); ?>
-          
-          <?php if ( !dynamic_sidebar( 'sidebar-1' ) ) : ?>
-
-
-
-
-
-
-          <?php endif; // end sidebar widget area ?>
-          
-          <div class="social-links">
-            <a target="_blank" href="">
-              <img alt="facebook" src="https://jscsos.com/content/themes/nasa_jsc/img/FacebookIcon.png" height="64" width="64">
-            </a>
-            <a target="_blank" href="">
-              <img alt="twitter" src="https://jscsos.com/content/themes/nasa_jsc/img/TwitterIcon.png" height="64" width="64">
-            </a>
+            </div>
           </div>
-        </div>
-        <!-- End Column 3 -->
+          <!-- End Column 2 -->
+          
+          <!-- Column 3 -->
+          <div class="col-md-4 col-sm-4">
+
+            <aside id="secondary" class="widget-area" role="complementary">
+
+              <?php do_action( 'before_sidebar' ); ?>
+              
+              <?php if ( !dynamic_sidebar( 'sidebar-1' ) ) : ?>
+
+
+
+
+
+
+              <?php endif; // end sidebar widget area ?>
+              
+              <div class="social-links">
+                <a target="_blank" href="">
+                  <img alt="facebook" src="https://jscsos.com/content/themes/nasa_jsc/img/FacebookIcon.png" height="64" width="64">
+                </a>
+                <a target="_blank" href="">
+                  <img alt="twitter" src="https://jscsos.com/content/themes/nasa_jsc/img/TwitterIcon.png" height="64" width="64">
+                </a>
+              </div>
+            </div>
+            <!-- End Column 3 -->
+            
+          </main><!-- #main -->
+        </div><!-- #primary -->
+
         
-      </main><!-- #main -->
-    </div><!-- #primary -->
 
-    
-
-    <?php
-    get_footer();?>
+        <?php
+        get_footer();?>
 
 

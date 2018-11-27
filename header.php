@@ -6,18 +6,86 @@
     <link rel="shortcut icon" href="https://jscsos.com/content/plugins/jetty-ui/public/assets/favicon.ico?v=2"><link rel="dns-prefetch" href="//s.w.org">
     
     <style type="text/css">
-    img.wp-smiley,
-    img.emoji {
-        display: inline !important;
-        border: none !important;
-        box-shadow: none !important;
-        height: 1em !important;
-        width: 1em !important;
-        margin: 0 .07em !important;
-        vertical-align: -0.1em !important;
-        background: none !important;
-        padding: 0 !important;
+
+    /* caption coy */
+
+    .wp-caption {
+        position: relative;
+        padding: 0;
+        margin: 0;
     }
+    .wp-caption img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+    .wp-caption:after {
+        content: "";
+        position: absolute;
+        display: block;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 0px, rgba(0, 0, 0, 0.6) 100%) repeat 0 0;
+        z-index: 1;
+    }
+    .wp-caption-text {
+        /*display: block;
+        position: absolute;*/
+        /*background-color :blue !important;*/
+        /*width: 100%;
+        color: #fff;*/
+       /* left: 0;
+        bottom: 0;
+        top:  -5;*/
+        /*border-radius: 50%;*/
+      /*  width: 40px;
+        height: 30px;*/
+
+        /*padding: 1em;
+        font-weight: 700;
+        z-index: 2;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;*/
+    }
+
+    .badge-xbox-one, .badge-xbox, .badge-success {
+    background-color: green;
+    }
+
+
+    .cap {
+    text-transform: uppercase;
+    width: 40px;
+    height: 30px;
+    top:  -5;
+    left: 90%;
+    bottom: 80%;
+    font-size: 11px;
+    font-weight: 400;
+    padding: 8px 12px;
+    border-radius: 30px;
+    color: #fff;
+    }
+
+
+    #recentUpdatesCoy {
+        display: inline-block;
+    }
+
+    #recentUpdatesCoy p {
+        background-color: <?php echo get_theme_mod('recentUpdatesCoy'); ?>;
+        border: 1px solid #E6E65C;
+        border-radius: 8px;
+        color: #000000;
+        display: inline-block;
+        font-size: 30px;
+        padding: 5px;
+    }
+
+
+
 </style>
 
 
@@ -96,7 +164,7 @@
                                     <?php
                                     wp_nav_menu( 
                                         array(
-                                            
+
                                             'theme_location'    => 'primary_menu',
                                             
                 //'level'             => 2,

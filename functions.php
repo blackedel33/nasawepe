@@ -50,7 +50,7 @@ function theme_wp_scripts()
     
     
     // style.css
-    wp_enqueue_style('customize-style', get_stylesheet_uri());
+    //wp_enqueue_style('customize-style', get_stylesheet_uri());
     
     /**
      * JAVASCRPIPT
@@ -337,19 +337,32 @@ function SearchFilter($query) {
     $query->is_search = true;
     $query->is_home = false;
   }
-  return $query;}
-  add_filter('pre_get_posts','SearchFilter');
+  return $query;
+}
+add_filter('pre_get_posts','SearchFilter');
 
 
-  function nasa2_admin_notices() {
-    echo '<div class="error"><p>Selamat datang Happy Coding coy !</p></div>';
-  }
-  add_action('admin_notices', 'nasa2_admin_notices');
+  // function nasa2_admin_notices() {
+  //   echo '<div class="error"><p>Selamat datang Happy Coding coy !</p></div>';
+  // }
+  // add_action('admin_notices', 'nasa2_admin_notices');
 
 
 
   // masukin 
-  include( get_template_directory() . '/inc/theme-customizer.php');
-  // aktifkan
-  add_action('customize_register', 'nasa2_customize_register');
+include( get_template_directory() . '/inc/theme-customizer.php');
+  // // aktifkan
+
+
+add_action('customize_register', 'nasa2_customize_register');
+
+  // nambah fungsi enque
+function scripts_customizer(){
+  wp_enqueue_script('custom', get_template_directory_uri().'/js/custom.js', array('jquery', '
+    customize_preview'));
+}
+add_action('customize_preview_init', 'scripts_customizer');
+
+
+
 

@@ -168,8 +168,9 @@ get_header();?>
                       <figure class="wp-caption">
                         <?php if ( has_post_thumbnail() ) : ?>
                           <a href="<?php the_permalink(); ?>"><img class="demo" src="<?php the_post_thumbnail( 'large' ); ?></a>
-                          <figcaption class="wp-caption-text"><?php $test = get_post_meta($post->ID, "rating_book", true); 
+                          <figcaption class="wp-caption-text cap badge-xbox-one"><?php $test = get_post_meta($post->ID, "rating_book", true); 
                           echo  $test; ?></figcaption>
+                          <!-- <div class="badge badge-xbox-one">Xbox One</div> -->
                         <?php endif; ?>
                       </figure>
                     </p>

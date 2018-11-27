@@ -24,7 +24,7 @@ get_header();?>
 								$args = array(
 									'category' => 9,
 									'post_type' => 'book',
-									'posts_per_page' => 4,
+									'posts_per_page' => 5,
 									'paged' => $paged
 								);
 								$wp_query = new WP_Query($args);
