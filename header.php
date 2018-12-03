@@ -7,7 +7,14 @@
     
     <style type="text/css">
 
-    /* Sets width of entire accordion */
+    .widget .widget-title {
+    color: <?php echo get_theme_mod('hmm4'); ?>;
+    font-size: 2em;
+    }
+
+    /* accord start */
+
+       /* Sets width of entire accordion */
 .topbaricons {
   max-width: 75%;
   margin: 0 auto;
@@ -55,6 +62,32 @@ button.accordion:hover {
     transition: max-height 0.2s ease-out;
 }
 
+    #jrlw-accordian .accordion-toggle{
+    cursor: pointer; 
+    padding: 10px;
+    border-radius: 10px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+#jrlw-accordian .accordion-toggle:not(.jrlw-active){
+  width: 85%;
+}
+#jrlw-accordian .fa-info-circle {
+    float: right;
+    margin-top: 3px;
+    display: inline;
+}
+#jrlw-accordian .accordion-content {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #efefef;
+    overflow: hidden;
+    display: none;
+}
+
+    /* accord finish */
+
+ 
     /* caption coy */
 
     .wp-caption {
@@ -107,7 +140,7 @@ button.accordion:hover {
     text-transform: uppercase;
     width: 40px;
     height: 30px;
-    top:  -5;
+    top:  -50;
     left: 90%;
     bottom: 80%;
     font-size: 11px;
@@ -131,34 +164,6 @@ button.accordion:hover {
         font-size: 30px;
         padding: 5px;
     }
-
-    #jrlw-accordian .accordion-toggle{
-    cursor: pointer; 
-    padding: 10px;
-    border-radius: 10px;
-    color: #ffffff;
-    margin-bottom: 10px;
-}
-
-#jrlw-accordian .accordion-toggle:not(.jrlw-active){
-  width: 85%;
-}
-
-#jrlw-accordian .fa-info-circle {
-    float: right;
-    margin-top: 3px;
-    display: inline;
-}
-
-#jrlw-accordian .accordion-content {
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #efefef;
-    overflow: hidden;
-    display: none;
-}
-
-
 
 </style>
 

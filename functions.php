@@ -364,7 +364,176 @@ function scripts_customizer(){
 add_action('customize_preview_init', 'scripts_customizer');
 
 
+//fungsi nambah menu
+
+function admin_add_admin_page() {
+
+  //Generate admin Admin Page
+  add_menu_page( 'admin Theme Options', 'admin', 'manage_options', 'admin_page', 'admin_theme_create_page');
+  
+  //Generate admin Admin Sub Pages
+  // add_submenu_page( 'admin_page', 'admin Theme Options', 'General', 'manage_options', 'admin_page', 'admin_theme_create_page' );
+  // add_submenu_page( 'admin_page', 'admin CSS Options', 'Custom CSS', 'manage_options', 'admin_page_css', 'admin_theme_settings_page');
+  
+  
+  
+}
+add_action( 'admin_menu', 'admin_add_admin_page' );
+
+//Activate custom settings
+add_action( 'admin_init', 'admin_custom_settings' );
+
+function admin_custom_settings() {
+  register_setting( 'admin-settings-group', 'first_name' );
+  add_settings_section( 'admin-sidebar-options', 'Sidebar Option', 'admin_sidebar_options', 'admin_page');
+  add_settings_field( 'sidebar-name', 'First Name', 'admin_sidebar_name', 'admin_page', 'admin-sidebar-options');
+}
+
+    function admin_sidebar_options() {
+       echo 'Customize your Sidebar Information';
+    }
+
+    function admin_sidebar_name() {
+      $firstName = esc_attr( get_option( 'first_name' ) );
+        echo '<input type="text" name="first_name" value="'.$firstName.'" placeholder="First Name" />';
+    }
+
+
+    function admin_theme_create_page() {
+      require_once( get_template_directory() . '/inc/min.php' );
+    }
+
+    function admin_theme_settings_page() {
+
+      echo '<h1>admin Custom CSS</h1>';
+      
+    }
 
 
 
 
+add_action('admin_init', 'add_meta_boxes', 1);
+
+function add_meta_boxes() {
+  add_meta_box( 'repeatable-fields', 'Coba Metabox Acc', 'repeatable_meta_box_display', 'post', 'normal', 'high');
+}
+function repeatable_meta_box_display() {
+  global $post;
+  $repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);
+
+
+  var_dump($repeatable_fields);
+
+  wp_nonce_field( 'repeatable_meta_box_nonce', 'repeatable_meta_box_nonce' );
+?>
+  <script type="text/javascript">
+jQuery(document).ready(function($) {
+  $('.metabox_submit').click(function(e) {
+    e.preventDefault();
+    $('#publish').click();
+  });
+  $('#add-row').on('click', function() {
+    var row = $('.empty-row.screen-reader-text').clone(true);
+    row.removeClass('empty-row screen-reader-text');
+    row.insertBefore('#repeatable-fieldset-one tbody>tr:last');
+    return false;
+  });
+  $('.remove-row').on('click', function() {
+    $(this).parents('tr').remove();
+    return false;
+  });
+  // $('#repeatable-fieldset-one tbody').sortable({
+  //   opacity: 0.6,
+  //   revert: true,
+  //   cursor: 'move',
+  //   handle: '.sort'
+  // });
+});
+  </script>
+
+  <table id="repeatable-fieldset-one" width="100%">
+  <thead>
+    <tr>
+      <th width="2%"></th>
+      <th width="30%">Title</th>
+      <th width="60%">Desc</th>
+      <th width="2%"></th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php
+  if ( $repeatable_fields ) :
+    foreach ( $repeatable_fields as $field ) {
+?>
+  <tr>
+    <td><a class="button remove-row" href="#">-</a></td>
+    <td><input type="text" class="widefat" name="title[]" value="<?php if($field['title'] != '') echo esc_attr( $field['title'] ); ?>" /></td>
+
+    <td><input type="text" class="widefat" name="desc[]" value="<?php if ($field['desc'] != '') echo esc_attr( $field['desc'] ); else echo ''; ?>" /></td>
+    <td><!-- <a class="sort">|||</a> --></td>
+    
+  </tr>
+  <?php
+    }
+  else :
+    // show a blank one
+?>
+  <tr>
+    <td><a class="button remove-row" href="#">-</a></td>
+    <td><input type="text" class="widefat" name="title[]" /></td>
+
+
+    <td><input type="text" class="widefat" name="desc[]" value="" /></td>
+<td><!-- <a class="sort">|||</a> --></td>
+    
+  </tr>
+  <?php endif; ?>
+
+  <!-- empty hidden one for jQuery -->
+  <tr class="empty-row screen-reader-text">
+    <td><a class="button remove-row" href="#">-</a></td>
+    <td><input type="text" class="widefat" name="title[]" /></td>
+
+
+    <td><input type="text" class="widefat" name="desc[]" value="" /></td>
+<td><!-- <a class="sort">|||</a> --></td>
+    
+  </tr>
+  </tbody>
+  </table>
+
+  <p><a id="add-row" class="button" href="#">Add another</a>
+  <input type="submit" class="metabox_submit" value="Save" />
+  </p>
+  
+  <?php
+}
+add_action('save_post', 'repeatable_meta_box_save');
+
+function repeatable_meta_box_save($post_id) {
+  if ( ! isset( $_POST['repeatable_meta_box_nonce'] ) ||
+    ! wp_verify_nonce( $_POST['repeatable_meta_box_nonce'], 'repeatable_meta_box_nonce' ) )
+    return;
+  if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+    return;
+  if (!current_user_can('edit_post', $post_id))
+    return;
+  $old = get_post_meta($post_id, 'repeatable_fields', true);
+  $new = array();
+  $names = $_POST['title'];
+  $urls = $_POST['desc'];
+  $count = count( $names );
+  for ( $i = 0; $i < $count; $i++ ) {
+    if ( $names[$i] != '' ) :
+      $new[$i]['title'] = stripslashes( strip_tags( $names[$i] ) );
+    if ( $urls[$i] == '' )
+      $new[$i]['desc'] = '';
+    else
+      $new[$i]['desc'] = stripslashes( $urls[$i] ); // and however you want to sanitize
+    endif;
+  }
+  if ( !empty( $new ) && $new != $old )
+    update_post_meta( $post_id, 'repeatable_fields', $new );
+  elseif ( empty($new) && $old )
+    delete_post_meta( $post_id, 'repeatable_fields', $old );
+}

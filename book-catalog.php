@@ -251,26 +251,6 @@ get_header();?>
 </div><!-- #primary -->
 
 
-<div id="jrlw-accordian">
-<h4 class="accordion-toggle " style="background-color: #b72a2a;">1- Full Activation<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
-<div class="accordion-content " style="display: none;">
-<h3>test</h3>
-<p>level1</p>
-</div>
-<h4 class="accordion-toggle " style="background-color: #eae320;">2- Limited Activation<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
-<div class="accordion-content " style="display: block;">
-<h3>Level 2 - Limited Activation</h3>
-<p>level2</p>
-</div>
-<h4 class="accordion-toggle jrlw-active" style="background-color: #4f962e;">3- Normal Operations<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
-<div class="accordion-content " style="display: none;">
-<h3>Level 3 - Normal Operations</h3>
-<p>level 3</p>
-</div>
-</div>
-
-<script type="text/javascript" src="http://gcoem.org/content/plugins/jetty-readiness-level-widget/assets/js/jrlw-frontend.js?ver=4.9.6"></script>
-
 
 
 
@@ -314,7 +294,6 @@ $args = array(
   ),
 
 );
-
 
 
 

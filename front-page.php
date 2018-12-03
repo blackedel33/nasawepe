@@ -1,5 +1,14 @@
 <?php
-get_header();?>
+get_header();
+
+$mytext = get_post_meta($post->ID, 'mytext', true);
+//$repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);
+
+$repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);
+
+
+var_dump($repeatable_fields);
+?>
 <div id="content" class="site-content container">
   <div class="row">
     <div class="col-md-8 jsc-status">
@@ -43,7 +52,10 @@ By accessing and/or using this code snippet, you agree to AccuWeather’s terms 
 -->
 </a><div id="awcc1541566410139" class="aw-widget-current"  data-locationkey="208996" data-unit="c" data-language="en-us" data-useip="false" data-uid="awcc1541566410139"></div><script type="text/javascript" src="https://oap.accuweather.com/launch.js"></script></p>
 
+
 </div><!-- #primary-sidebar -->
+
+
 
 
 <div class="hide-date related-links">
@@ -99,12 +111,108 @@ By accessing and/or using this code snippet, you agree to AccuWeather’s terms 
     <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
     
   </div>
-  
-  
-  
-  <div class="container latest-news">
-    <h3>Latest News</h3>
-    <?php
+
+  <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+  <?
+// $args = array( 'post_type' => 'readlevel', 'order' => 'ASC' ,  'posts_per_page' => 10 );
+// $loop = new WP_Query( $args );
+// while ( $loop->have_posts() ) : $loop->the_post();
+//   the_title();
+//   echo '<div class="entry-content">';
+//   the_content();
+//   echo '</div>';
+// endwhile;
+
+// $args = array( 
+//   'numberposts'   => 1, // -1 is for all
+//   'post_type'   => 'readlevel', // or 'post', 'page'
+//   'orderby'     => 'title', // or 'date', 'rand'
+//   'order'     => 'ASC', // or 'DESC'
+//   //'category'    => $category_id,
+//   //'exclude'   => get_the_ID()
+//   // ...
+//   // http://codex.wordpress.org/Template_Tags/get_posts#Usage
+// );
+
+// // Get the posts
+// $myposts = get_posts($args);
+
+// echo '<pre>';
+// var_dump ($myposts);
+// echo '</pre>';
+
+
+    // $posts = get_posts(array(  //Get the FAQ Custom Post Type
+    //     'numberposts' => 10,
+    //     'orderby' => 'menu_order',
+    //     'order' => 'ASC',
+    //     'post_type' => 'readlevel',
+    // ));
+
+    // echo $posts;
+
+// var_dump($mytext);
+  if(isset($repeatable_fields) && is_array($repeatable_fields)){
+    echo '<div id="jrlw-accordian">';
+    $i = 1;
+   foreach($repeatable_fields as $field){
+   	 echo '<input id="prod-' . $i . '" type="hidden" ">';
+     echo '<h4 class="accordion-toggle" id="hmm1" style="background-color: green">'.$field['title'].'<i class="fa fa-info-circle" aria-hidden="true"></i></h4>';
+     echo '<div class="accordion-content" style="display: none;">'.$field['desc'].'</div>';
+   }
+   //echo '<div class="accordion-content" style="display: none;">';
+   
+   // echo '</div>';
+   echo '</div>';
+ }
+
+
+ ?>
+
+<!--  <script type="text/javascript">
+  $(document).ready(function() {
+      $( "#myaccordion" ).accordion();
+  });
+</script> -->
+
+
+
+<!--  <div id="jrlw-accordian">
+  <h4 class="accordion-toggle" id="hmm1" style="background-color: <?php echo get_theme_mod('hmm1'); ?>;">1- Full Activation<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
+  <div class="accordion-content " style="display: none;">
+    <h3>test</h3>
+    <p>level1</p>
+  </div>
+  <h4 class="accordion-toggle " style="background-color: <?php echo get_theme_mod('hmm2'); ?>;">2- Limited Activation<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
+  <div class="accordion-content " style="display: block;">
+    <h3>Level 2 - Limited Activation</h3>
+    <p>level2</p>
+  </div>
+  <h4 class="accordion-toggle" style="background-color: <?php echo get_theme_mod('hmm3'); ?>;">3 - Normal Operations<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
+  <div class="accordion-content " style="display: none;">
+    <h3>Level 3 - Normal Operations</h3>
+    <p>level 3</p>
+  </div>
+  <h4 class="accordion-toggle jrlw-active" style="background-color: <?php echo get_theme_mod('hmm3'); ?>;">4 - Normal Operations<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
+  <div class="accordion-content " style="display: none;">
+    <h3>Level 4 - Normal Operations</h3>
+    <p>level 3</p>
+  </div>
+
+</div>
+ -->
+
+<script type="text/javascript" src="http://gcoem.org/content/plugins/jetty-readiness-level-widget/assets/js/jrlw-frontend.js?ver=4.9.6"></script>
+
+
+
+
+
+<div class="container latest-news">
+  <h3>Latest News</h3>
+  <?php
                             /**
                             * Check Apakah Ada Postingan
                             */
