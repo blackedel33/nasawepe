@@ -7,6 +7,10 @@
     
     <style type="text/css">
 
+.main-navigation {
+  display: none;
+}
+
     .widget .widget-title {
     color: <?php echo get_theme_mod('hmm4'); ?>;
     font-size: 2em;

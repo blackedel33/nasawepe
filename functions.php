@@ -537,3 +537,199 @@ function repeatable_meta_box_save($post_id) {
   elseif ( empty($new) && $old )
     delete_post_meta( $post_id, 'repeatable_fields', $old );
 }
+
+
+// add_filter('show_admin_bar', '___return_false');
+
+
+// menyembunyikan new post di nav bar admin
+
+function change_world(){
+    global $wp_admin_bar;
+    $wp_admin_bar->remove_menu('new-post');
+    // $wp_admin_bar->remove_menu('new-link');
+    // $wp_admin_bar->remove_menu('new-media');
+}
+
+add_action('wp_before_admin_bar_render', 'change_world');
+
+// ngilangin color scheme
+
+function admin_color_scheme(){
+  global $_wp_admin_css_colors;
+  $_wp_admin_css_colors = 0;
+}
+add_action('admin_head', 'admin_color_scheme');
+
+// add contact in users
+add_action( 'show_user_profile', 'add_contact' );
+add_action( 'edit_user_profile', 'add_contact' );
+add_action('user_new_form', 'add_contact');
+
+function add_contact( $user ) {
+?>
+  <table class="form-table">
+    <tr>
+      <th>
+        <label for="hp"><?php _e('hp', 'your_textdomain'); ?>
+      </label></th>
+      <td>
+        <input type="text" name="hp" id="hp" value="<?php echo esc_attr( get_the_author_meta( 'hp', $user->ID ) ); ?>" class="regular-text" /><br />
+        <span class="description"><?php _e('Masukkan No HP', 'your_textdomain'); ?></span>
+      </td>
+    </tr>
+  </table>
+<?php }
+
+function save_contact_user( $user_id ) {
+  
+  if ( !current_user_can( 'edit_user', $user_id ) )
+    return FALSE;
+  
+  update_usermeta( $user_id, 'hp', $_POST['hp'] );
+}
+
+//fungsi untuk register di contact
+
+add_action( 'personal_options_update', 'save_contact_user' );
+add_action( 'edit_user_profile_update', 'save_contact_user' );
+add_action('user_register','save_contact_user');
+
+
+
+
+
+
+
+// function new_contact_methods( $contactmethods ) {
+//     $contactmethods['phone'] = 'Phone Number';
+//     return $contactmethods;
+// }
+// add_filter( 'user_contactmethods', 'new_contact_methods', 10, 1 );
+
+
+// function new_modify_user_table( $column ) {
+//     $column['phone'] = 'Phone';
+//     return $column;
+// }
+// add_filter( 'manage_users_columns', 'new_modify_user_table' );
+
+// function new_modify_user_table_row( $val, $column_name, $user_id ) {
+//     switch ($column_name) {
+//         case 'phone' :
+//             return get_the_author_meta( 'phone', $user_id );
+//             break;
+//         default:
+//     }
+//     return $val;
+// }
+// add_filter( 'manage_users_custom_column', 'new_modify_user_table_row', 10, 3 );
+
+
+// add_action( 'admin_init', 'my_remove_menu_pages' );
+// function my_remove_menu_pages() {
+ 
+// global $user_ID;
+ 
+// if ( current_user_can( 'contributor' ) ) {
+// remove_menu_page( 'edit.php' );
+
+// }
+// }
+
+/**
+ * Force the 'mine' view on the 'edit-post' screen
+ */
+
+// $user = wp_get_current_user();
+// $allowed_roles = array('editor', 'administrator', 'contributor');
+// {
+// if( array_intersect($allowed_roles, $user->roles ) )
+//     return $views;
+//    echo "asdadsasdasdasdasdasdasdasddsdasdasda";
+//    echo "asdadsasdasdasdasdasdasdasddsdasdasda";
+// }
+
+
+// $user = wp_get_current_user();
+// $allowed_roles = array('editor', 'administrator', 'contributor');
+
+// fungsi filter untuk admin ada bagian trash , dan contributor ga ada trash
+
+add_filter( 'views_edit-post', function( $views )
+{
+    if( current_user_can( 'delete_others_posts' ) )
+        return $views;
+
+    $remove_views = ['trash' ];
+
+    foreach( (array) $remove_views as $view )
+    {
+        if( isset( $views[$view] ) )
+            unset( $views[$view] );
+    }
+    return $views;
+} );
+
+// if ( ! current_user_can('delete_others_posts') ) {
+  
+//     add_action( 'admin_menu', 'notadmin_remove_menus', 999 ); 
+  
+// } 
+// function notadmin_remove_menus() {
+  
+//     // INSERT MENU ITEMS TO REMOVE HERE
+  
+// }
+
+
+
+
+// add_action( 'init', 'wpsites_remove_contributor_capabilities' );
+
+// function wpsites_remove_contributor_capabilities() {
+
+// $contributor = get_role( 'contributor' );
+
+// $caps = array(
+
+//     'delete_posts',
+// );
+
+// foreach ( $caps as $cap ) {
+
+//     $contributor->remove_cap( $cap );
+//     }
+// }
+
+
+
+// add_action( 'init', 'wpsites_remove_contributor_capabilities' );
+
+// function wpsites_remove_contributor_capabilities() {
+
+// $contributor = get_role( 'contributor' );
+
+// $caps = array(
+//     'delete_posts',
+// );
+
+// foreach ( $caps as $cap ) {
+
+//     $contributor->remove_cap( $cap );
+//     }
+// }
+
+//nggo backup
+
+// function allow_contrib_upload() {
+
+//     // get the role
+//     $contrib = get_role( 'contributor' );
+
+//     // add the upload capability
+//     $contrib->add_cap('edit_published_posts');
+
+//     $contrib->add_cap( 'upload_files' );
+// }
+// add_action( 'admin_init', 'allow_contrib_upload', 11 );

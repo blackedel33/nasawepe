@@ -2,16 +2,22 @@
 get_header();
 
 $mytext = get_post_meta($post->ID, 'mytext', true);
+$bgcolor = get_post_meta( 68, 'bg_color', true );
+
+
 //$repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);
 
 $repeatable_fields = get_post_meta($post->ID, 'repeatable_fields', true);
 
 
-var_dump($repeatable_fields);
+
+
+//var_dump($repeatable_fields);
 ?>
 <div id="content" class="site-content container">
   <div class="row">
     <div class="col-md-8 jsc-status">
+      <?php echo get_option( 'warna' ); ?>
       <h2>November 7, 2018 - <div id="recentUpdatesCoy"><p>JSC is <?php echo get_theme_mod('text_farid'); ?> </p></div></h2>
     </div>
     <div class="col-md-4 search-wrap">
@@ -153,14 +159,19 @@ By accessing and/or using this code snippet, you agree to AccuWeather’s terms 
 
     // echo $posts;
 
-// var_dump($mytext);
+
+
+$coloracc = get_option('warna');
+
   if(isset($repeatable_fields) && is_array($repeatable_fields)){
     echo '<div id="jrlw-accordian">';
     $i = 1;
    foreach($repeatable_fields as $field){
    	 echo '<input id="prod-' . $i . '" type="hidden" ">';
-     echo '<h4 class="accordion-toggle" id="hmm1" style="background-color: green">'.$field['title'].'<i class="fa fa-info-circle" aria-hidden="true"></i></h4>';
-     echo '<div class="accordion-content" style="display: none;">'.$field['desc'].'</div>';
+     echo '<h4 class="accordion-toggle" id='.$i.' style="background-color: '.$coloracc.'">'.$field['title'].'<i class="fa fa-info-circle" aria-hidden="true"></i></h4>';
+     //echo '<b>'.$field['title'].'</b>';
+     echo '<div class="accordion-content" style="display: none;"><h3 font-family: Oswald, Helvetica, Arial, sans-serif; >'.$field['title'].'</h3><br>'.$field['desc'].'</div>';
+
    }
    //echo '<div class="accordion-content" style="display: none;">';
    
@@ -179,30 +190,30 @@ By accessing and/or using this code snippet, you agree to AccuWeather’s terms 
 
 
 
-<!--  <div id="jrlw-accordian">
-  <h4 class="accordion-toggle" id="hmm1" style="background-color: <?php echo get_theme_mod('hmm1'); ?>;">1- Full Activation<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
+<!-- <div id="jrlw-accordian">
+  <h4 class="accordion-toggle" id="hmm1" style="background-color: <?php echo get_option( 'warna' ); ?>">Level 1 - Danger<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
   <div class="accordion-content " style="display: none;">
     <h3>test</h3>
     <p>level1</p>
   </div>
-  <h4 class="accordion-toggle " style="background-color: <?php echo get_theme_mod('hmm2'); ?>;">2- Limited Activation<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
+  <h4 class="accordion-toggle " style="background-color:<?php $titlecolor = get_post_meta( 68, 'title_color', true ); echo $titlecolor; ?>">Level 2 - High<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
   <div class="accordion-content " style="display: block;">
     <h3>Level 2 - Limited Activation</h3>
     <p>level2</p>
   </div>
-  <h4 class="accordion-toggle" style="background-color: <?php echo get_theme_mod('hmm3'); ?>;">3 - Normal Operations<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
+  <h4 class="accordion-toggle" style="background-color: <?php echo get_theme_mod('hmm3'); ?>;">Level 3 - Limited<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
   <div class="accordion-content " style="display: none;">
     <h3>Level 3 - Normal Operations</h3>
     <p>level 3</p>
   </div>
-  <h4 class="accordion-toggle jrlw-active" style="background-color: <?php echo get_theme_mod('hmm3'); ?>;">4 - Normal Operations<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
+  <h4 class="accordion-toggle jrlw-active" style="background-color: <?php echo get_theme_mod('hmm3'); ?>;">Level 4 - Normal<i class="fa fa-info-circle" aria-hidden="true"></i></h4>
   <div class="accordion-content " style="display: none;">
     <h3>Level 4 - Normal Operations</h3>
     <p>level 3</p>
   </div>
 
-</div>
- -->
+</div> -->
+
 
 <script type="text/javascript" src="http://gcoem.org/content/plugins/jetty-readiness-level-widget/assets/js/jrlw-frontend.js?ver=4.9.6"></script>
 
@@ -240,7 +251,9 @@ By accessing and/or using this code snippet, you agree to AccuWeather’s terms 
                           <?php
 
                         } else {
-                // not found article ?>
+                // not found article 
+
+                ?>
                 <div class="post-preview">
                   <h2 class="post-title">Article Not Found!!!</h2>
                 </div>
